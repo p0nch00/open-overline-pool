@@ -253,9 +253,9 @@ func (u *BlockUnlocker) unlockPendingBlocks() {
 
 	current, err := u.rpc.GetLatestBlock()
 	if err != nil {
-		u.halt = true
-		u.lastFail = err
-		log.Printf("Unable to get current blockchain height from node: %v", err)
+		//u.halt = true DUHHHHH... Ditto
+		//u.lastFail = err
+		log.Printf("Unable to get current blockchain height from node: Retrying")
 		return
 	}
 	currentHeight, err := strconv.ParseInt(string(current.Number), 10, 64)
@@ -351,9 +351,9 @@ func (u *BlockUnlocker) unlockAndCreditMiners() {
 
 	current, err := u.rpc.GetLatestBlock()
 	if err != nil {
-		u.halt = true
-		u.lastFail = err
-		log.Printf("Unable to get current blockchain height from node: %v", err)
+		//u.halt = true #BCnode after 1.4.9 is weird. They do EOF when they sync to a fork, instead of just delaying
+		//u.lastFail = err
+		log.Printf("Unable to get current blockchain height from node: Waiting")
 		return
 	}
 	currentHeight, err := strconv.ParseInt(string(current.Number), 10, 64)
