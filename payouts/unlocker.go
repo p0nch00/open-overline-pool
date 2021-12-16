@@ -451,7 +451,7 @@ func (u *BlockUnlocker) calculateRewards(block *storage.BlockData) (*big.Rat, *b
 		return nil, nil, nil, nil, err
 	}
 
-	rewards := calculateRewardsForShares(shares, block.TotalShares, minersProfit)
+	rewards := calculateRewardsForShares(shares, block.TotalShares, minersProfit) //here we need to modify the shares array and calculate a diffent totalshares, or we could add them to eachother. 
 
 	if block.ExtraReward != nil {
 		extraReward := new(big.Rat).SetInt(block.ExtraReward)
